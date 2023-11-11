@@ -1,0 +1,31 @@
+{% extends "modelo.html" %}
+{% block conteudo %}
+      <h1>Olá, mundo!</h1>
+      <p><a href="/sobre-equipe">Próxima Página</a></p>
+
+     <form method="post">
+       <label for="termo">Termo:</label><br>
+       <input type="text" id="termo" name="termo"><br>
+       <label for="definicao">Definição:</label><br>
+       <input type="text" id="definicao" name="definicao"><br>
+       <input type="submit" value="Submit">
+     </form>
+
+    <table class="table table-striped table-responsive table-bordered">
+    <thead class="thead-default">
+    <tr>
+        <th>Termo</th>
+        <th>Definição</th>
+    </tr>
+    </thead>
+    <tbody>
+          {% for item in glossario %}
+              <tr>
+                <td>{{ item.termo }}</td>
+                <td>{{ item.definicao }}</td>
+              </tr>
+          {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock %}
