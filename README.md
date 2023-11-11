@@ -17,6 +17,7 @@ docs - Commits do tipo docs indicam que houveram mudanças na documentação, co
 
 test - Commits do tipo test são utilizados quando são realizadas alterações em testes, seja criando, alterando ou excluindo testes unitários. (Não inclui alterações em código)
 
+
 # Repositório de Aprendizado sobre Git e Versionamento 
 
 Este repositório é destinado a ajudar iniciantes a entender e praticar conceitos fundamentais de controle de versão, como branches, padrões de commits e versionamento. Aqui, você encontrará informações e recursos para melhorar seu conhecimento nesses tópicos.
@@ -64,4 +65,4 @@ Ao criar tags de versão em seu repositório, siga o padrão de versionamento se
 - [Documentação oficial do Git](https://git-scm.com/doc)
 - [Guia do Versionamento Semântico](https://semver.org/)
 
-Este repositório é um espaço de aprendizado e prática. Sinta-se à vontade para experimentar e aprimorar suas habilidades com Git e versionamento. Boa sorte!
+
