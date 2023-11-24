@@ -1,6 +1,6 @@
 import os
-from flask import Flask, render_template, request, url_for, redirect
 import csv
+from flask import Flask, render_template, redirect, url_for, request
 
 app = Flask(__name__)
 
@@ -10,53 +10,110 @@ os.environ['FLASK_DEBUG'] = 'True'
 # Configurando o modo de depuração com base na variável de ambiente
 app.debug = os.environ.get('FLASK_DEBUG') == 'True'
 
-# Teste de Glossário
-class Termo:
- def __init__(self, termo, definicao):
-     self.termo = termo
-     self.definicao = definicao
-
- @classmethod
- def from_csv(cls, row):
-     return cls(row[0], row[1])
-
- def to_csv(self):
-     return [self.termo, self.definicao]
-
-# Inicializando o glossario
-
-def save_glossario_to_csv(glossario):
- with open('glossario.csv', 'w', newline='') as file:
-     writer = csv.writer(file)
-     for termo in glossario:
-         writer.writerow(termo.to_csv())
-
-def load_glossario_from_csv():
- glossario = []
- if os.path.exists('glossario.csv'):
-   with open('glossario.csv', 'r') as file:
-     reader = csv.reader(file)
-     for row in reader:
-         glossario.append(Termo.from_csv(row))
- return glossario
-glossario = load_glossario_from_csv()
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def ola():
- if request.method == 'POST':
-     termo = request.form['termo']
-     definicao = request.form['definicao']
-     glossario.append(Termo(termo, definicao))
-     save_glossario_to_csv(glossario)
-     return redirect(url_for('ola'))
-
- return render_template('index.html', glossario=glossario)
-
+    return render_template('index.html')
 
 
 @app.route('/sobre-equipe')
 def sobre():
-   return render_template('sobre.html')
+    return render_template('sobre.html')
+
+@app.route('/glossario')
+def glossario():
+
+    glossario_de_termos = []
+
+    with open('bd_glossario.csv', newline='', encoding='utf-8') as arquivo:
+        reader = csv.reader(arquivo, delimiter=';')
+        for l in reader:
+            glossario_de_termos.append(l)
+
+    return render_template('glossario.html', glossario=glossario_de_termos)
+
+@app.route('/novo_termo')
+def novo_termo():
+    return render_template('adicionar_termo.html')
+
+@app.route('/criar_termo', methods=['POST', ])
+def criar_termo():
+    termo = request.form['termo']
+    definicao = request.form['definicao']
+
+    with open('bd_glossario.csv', 'a', newline='', encoding='utf-8') as arquivo:
+        writer = csv.writer(arquivo, delimiter=';')
+        writer.writerow([termo, definicao])
+
+    return redirect(url_for('glossario'))
+
+@app.route('/excluir_termo/<int:termo_id>', methods=['POST'])
+def excluir_termo(termo_id):
+
+    with open('bd_glossario.csv', 'r', newline='') as arquivo:
+        reader = csv.reader(arquivo)
+        linhas = list(reader)
+
+    #Encontrar e excluir o termo com base no ID
+    for i, linha in enumerate(linhas):
+        if i == termo_id:
+            del linhas[i]
+            break
+
+    #salvar as alterações de volta no arquivo
+    with open('bd_glossario.csv', 'w', newline='') as arquivo:
+        writer = csv.writer(arquivo)
+        writer.writerows(linhas)
+
+    return redirect(url_for('glossario'))
+
+
+@app.route('/tarefas')
+def tarefas():
+
+    lista_de_tarefas = []
+
+    with open('bd_tarefas.csv', newline='', encoding='utf-8') as arquivo:
+        reader = csv.reader(arquivo, delimiter=';')
+        for l in reader:
+            lista_de_tarefas.append(l)
+
+    return render_template('tarefas.html', tarefas=lista_de_tarefas)
+
+@app.route('/nova_tarefa')
+def nova_tarefa():
+    return render_template('adicionar_tarefa.html')
+
+@app.route('/criar_tarefa', methods=['POST', ])
+def criar_tarefa():
+    lista = request.form['lista']
+    descricao = request.form['descricao']
+
+    with open('bd_tarefas.csv', 'a', newline='', encoding='utf-8') as arquivo:
+        writer = csv.writer(arquivo, delimiter=';')
+        writer.writerow([lista, descricao])
+
+    return redirect(url_for('tarefas'))
+
+@app.route('/excluir_tarefa/<int:tarefa_id>', methods=['POST'])
+def excluir_tarefa(tarefa_id):
+
+    with open('bd_tarefas.csv', 'r', newline='') as arquivo:
+        reader = csv.reader(arquivo)
+        linhas = list(reader)
+
+    #Encontrar e excluir o termo com base no ID
+    for i, linha in enumerate(linhas):
+        if i == tarefa_id:
+            del linhas[i]
+            break
+
+    #salvar as alterações de volta no arquivo
+    with open('bd_tarefas.csv', 'w', newline='') as arquivo:
+        writer = csv.writer(arquivo)
+        writer.writerows(linhas)
+
+    return redirect(url_for('tarefas'))
+
 
 if __name__ == "__main__":
-   app.run()
+    app.run()

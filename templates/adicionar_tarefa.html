@@ -1,0 +1,18 @@
+{% extends "modelo.html" %}
+{% block conteudo %}
+<h1>Adicionar Tarefa</h1>
+
+<form action="{{ url_for('criar_tarefa')}}" method="post">
+  <div class="mb-3">
+    <label for="lista" class="form-label">Tarefa</label>
+    <input  class="form-control" id="lista" name="lista" aria-describedby="emailHelp">
+    <div id="listaHelp" class="form-text">Tarefa a ser adicionada.</div>
+  </div>
+  <div class="mb-3">
+    <label for="descricao" class="form-label">Descrição</label>
+    <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+{% endblock %}
