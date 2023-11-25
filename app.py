@@ -30,7 +30,7 @@ def index():
 
 
 
-@app.route('/sobre-equipe')
+@app.route('/sobre_equipe')
 def sobre():
     return render_template('sobre.html')
 
