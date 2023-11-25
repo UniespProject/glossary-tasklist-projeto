@@ -11,8 +11,23 @@ os.environ['FLASK_DEBUG'] = 'True'
 app.debug = os.environ.get('FLASK_DEBUG') == 'True'
 
 @app.route('/')
-def ola():
-    return render_template('index.html')
+def index():
+    glossario_de_termos = []
+
+    with open('bd_glossario.csv', newline='', encoding='utf-8') as arquivo:
+        reader = csv.reader(arquivo, delimiter=';')
+        for l in reader:
+            glossario_de_termos.append(l)
+
+    lista_de_tarefas = []
+
+    with open('bd_tarefas.csv', newline='', encoding='utf-8') as arquivo:
+        reader = csv.reader(arquivo, delimiter=';')
+        for l in reader:
+            lista_de_tarefas.append(l)
+
+    return render_template('index.html', glossario=glossario_de_termos, tarefas=lista_de_tarefas)
+
 
 
 @app.route('/sobre-equipe')
