@@ -27,7 +27,14 @@ def index():
         for l in reader:
             lista_de_tarefas.append(l)
 
-    return render_template('index.html', glossario=glossario_de_termos, tarefas=lista_de_tarefas)
+    tarefas_concluidas = []
+
+    with open('bd_tarefas_concluidas.csv', newline='', encoding='utf-8') as arquivo:
+        reader = csv.reader(arquivo, delimiter=';')
+        for l in reader:
+            tarefas_concluidas.append(l)
+
+    return render_template('index.html', glossario=glossario_de_termos, tarefas=lista_de_tarefas, concluidos=tarefas_concluidas)
 
 
 @app.route('/sobre_equipe')
@@ -93,7 +100,13 @@ def tarefas():
         for l in reader:
             lista_de_tarefas.append(l)
 
-    return render_template('tarefas.html', tarefas=lista_de_tarefas)
+    tarefas_concluidas = []
+    with open('bd_tarefas_concluidas.csv', newline='', encoding='utf-8') as arquivo:
+        reader = csv.reader(arquivo, delimiter=';')
+        for l in reader:
+            tarefas_concluidas.append(l)
+
+    return render_template('tarefas.html', tarefas=lista_de_tarefas, concluidos=tarefas_concluidas)
 
 
 @app.route('/nova_tarefa')
@@ -132,6 +145,41 @@ def excluir_tarefa(tarefa_id):
 
     return redirect(url_for('tarefas'))
 
+
+@app.route('/concluir_tarefa/<int:tarefa_id>', methods=['POST', ])
+def concluir_tarefa(tarefa_id):
+
+    lista_de_tarefas = []
+
+    with open('bd_tarefas.csv', newline='', encoding='utf-8') as arquivo:
+        reader = csv.reader(arquivo, delimiter=';')
+        for l in reader:
+            lista_de_tarefas.append(l)
+
+    tarefa = lista_de_tarefas[tarefa_id]
+
+    with open('bd_tarefas_concluidas.csv', 'a', newline='', encoding='utf-8') as arquivo:
+        writer = csv.writer(arquivo, delimiter=';')
+        writer.writerows([tarefa])
+
+#excluir
+
+    with open('bd_tarefas.csv', 'r', newline='') as arquivo:
+        reader = csv.reader(arquivo)
+        linhas = list(reader)
+
+    # Encontrar e excluir o termo com base no ID
+    for i, linha in enumerate(linhas):
+        if i == tarefa_id:
+            del linhas[i]
+            break
+
+    # salvar as alterações de volta no arquivo
+    with open('bd_tarefas.csv', 'w', newline='') as arquivo:
+        writer = csv.writer(arquivo)
+        writer.writerows(linhas)
+
+    return redirect(url_for('tarefas'))
 
 
 

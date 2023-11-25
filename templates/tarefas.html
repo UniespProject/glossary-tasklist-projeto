@@ -2,7 +2,7 @@
 {% block conteudo %}
 
 <div class="container-lg mt-4">
-    <h1 class="mb-4">Tarefas</h1>
+    <h1 class="mb-4">Tarefas em Andamento</h1>
 
     <div class="container-sm mb-4">
         <table class="table table-sm table-striped table-responsive table-bordered">
@@ -22,7 +22,7 @@
                 <td>{{ lista[1] }}</td>
                 <td>
                     <div class="container-sm d-flex justify-content-around ">
-                        <form>
+                        <form method="post" action="{{ url_for('concluir_tarefa', tarefa_id=loop.index-1) }}">
                             <button type="submit" class="btn btn-success">Concluir</button>
                         </form>
                         <form method="post" action="{{ url_for('excluir_tarefa', tarefa_id=loop.index-1) }}">
@@ -41,5 +41,39 @@
 </div>
 
 
+<div class="container-lg mt-4">
+    <h1 class="mb-4">Tarefas Concluídas</h1>
 
+    <div class="container-sm mb-4">
+        <table class="table table-sm table-striped table-responsive table-bordered">
+            <thead class="thead-default">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tarefa</th>
+                <th scope="col">Responsável</th>
+                <th scope="col">Ação</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for lista in concluidos %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ lista[0] }}</td>
+                <td>{{ lista[1] }}</td>
+                <td>
+                    <div class="container-sm d-flex justify-content-around ">
+                        <form method="post" action="{{ url_for('excluir_tarefa', tarefa_id=loop.index-1) }}">
+                            <button type="submit" class="btn btn-danger">Excluir</button>
+                        </form>
+                    </div>
+
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
 {% endblock %}
