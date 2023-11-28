@@ -34,7 +34,7 @@ projeto_flask/
 *  bd_glossario.csv: Arquivo CSV para armazenar dados do glossário.
 *  bd_tarefas.csv: Arquivo CSV para armazenar dados da lista de tarefas.
 *  bd_tarefas_concluidas.csv: Arquivo CSV para armazenar dados de tarefas concluídas.
-*  app.py: Arquivo principal que contém o código Flask.
+*  app.py: Arquivo principal que contém a lógica da aplicação.
 *   README.md: Documentação do projeto.
 
 ## Funcionalidades: 
