@@ -11,7 +11,16 @@ pip install Flask
 # Para executar o projeto
 flask run  
 ```
-
+após o comando isso deverá aparecer em seu terminal
+```
+ flask run
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+```
 ## Estrutura do Projeto
 O projeto consiste em um aplicativo web Flask para gerenciamento de glossário e tarefas. A estrutura de pastas e arquivos é a seguinte:
 
