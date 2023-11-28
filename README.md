@@ -73,4 +73,4 @@ A função excluir_tarefa exclui uma tarefa com base no ID fornecido, atualizand
 A função concluir_tarefa move uma tarefa da lista de tarefas para a lista de tarefas concluídas, atualizando ambos os arquivos CSV e redirecionando para a página de tarefas.
 
 * Executando o Projeto
-Para executar o projeto, certifique-se de ter o ambiente Flask configurado. Execute o arquivo app.py e acesse o aplicativo através do navegador.
+Para executar o projeto, certifique-se de ter a Venv e o ambiente Flask configurados. Execute o arquivo app.py e acesse o aplicativo através do navegador.
