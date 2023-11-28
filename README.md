@@ -1,5 +1,14 @@
 # Documentação do Projeto Flask
 Este documento fornece uma documentação detalhada do projeto Flask, explicando a estrutura do código, suas principais funcionalidades e como cada parte do código contribui para a aplicação.
+## Para a instalação do projeto execute os seguintes comandos: 
+```
+# Instalando o framework Flask
+pip install Flask 
+```
+```
+# Para executar o projeto
+flask run  
+```
 
 ## Estrutura do Projeto
 O projeto consiste em um aplicativo web Flask para gerenciamento de glossário e tarefas. A estrutura de pastas e arquivos é a seguinte:
