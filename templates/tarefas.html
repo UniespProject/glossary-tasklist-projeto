@@ -62,7 +62,7 @@
                 <td>{{ lista[1] }}</td>
                 <td>
                     <div class="container-sm d-flex justify-content-around ">
-                        <form method="post" action="{{ url_for('excluir_tarefa', tarefa_id=loop.index-1) }}">
+                        <form method="post" action="{{ url_for('excluir_tarefa_concluida', tarefa_id=loop.index-1) }}">
                             <button type="submit" class="btn btn-danger">Excluir</button>
                         </form>
                     </div>
