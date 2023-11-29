@@ -11,7 +11,7 @@ pip install Flask
 # Para executar o projeto
 flask run  
 ```
-após o comando isso deverá aparecer em seu terminal
+após o comando isso deverá aparecer em seu terminal.
 ```
  flask run
  * Debug mode: on

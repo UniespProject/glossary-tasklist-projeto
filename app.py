@@ -200,6 +200,5 @@ def excluir_tarefa_concluida(tarefa_id):
 
     return redirect(url_for('tarefas'))
 
-
 if __name__ == "__main__":
     app.run()
