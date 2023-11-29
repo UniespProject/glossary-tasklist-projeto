@@ -11,7 +11,10 @@ pip install Flask
 # Para executar o projeto
 flask run  
 ```
+
+
 após o comando isso deverá aparecer em seu terminal
+
 ```
  flask run
  * Debug mode: on
@@ -91,3 +94,8 @@ A função excluir_tarefa exclui uma tarefa com base no ID fornecido, atualizand
 
 * Concluir Tarefa **(concluir_tarefa)**:
 A função concluir_tarefa move uma tarefa da lista de tarefas para a lista de tarefas concluídas, atualizando ambos os arquivos CSV e redirecionando para a página de tarefas.
+
+
+* Excluir Tarefa Concluída **(excluir_tarefa_concluida)**:
+A função excluir_tarefa_concluida exclui uma tarefa concluída com base no ID fornecido, atualizando o arquivo CSV de tarefas concluídas e redirecionando para a página de tarefas.
+

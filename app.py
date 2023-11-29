@@ -181,7 +181,24 @@ def concluir_tarefa(tarefa_id):
 
     return redirect(url_for('tarefas'))
 
+@app.route('/excluir_tarefa_concluida/<int:tarefa_id>', methods=['POST'])
+def excluir_tarefa_concluida(tarefa_id):
+    with open('bd_tarefas_concluidas.csv', 'r', newline='') as arquivo:
+        reader = csv.reader(arquivo)
+        linhas = list(reader)
 
+    # Encontrar e excluir o termo com base no ID
+    for i, linha in enumerate(linhas):
+        if i == tarefa_id:
+            del linhas[i]
+            break
+
+    # salvar as alterações de volta no arquivo
+    with open('bd_tarefas_concluidas.csv', 'w', newline='') as arquivo:
+        writer = csv.writer(arquivo)
+        writer.writerows(linhas)
+
+    return redirect(url_for('tarefas'))
 
 if __name__ == "__main__":
     app.run()
